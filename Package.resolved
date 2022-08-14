@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "apnswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kylebrowning/APNSwift.git",
+      "state" : {
+        "revision" : "99a3c7bb5fd211009438fb386d18c94bb2f63b17",
+        "version" : "4.0.0"
+      }
+    },
+    {
       "identity" : "async-http-client",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/swift-server/async-http-client.git",
@@ -70,6 +79,15 @@
       "state" : {
         "revision" : "9616361c11bd42fca3dc06ac60bed6ad106c46c3",
         "version" : "0.13.5"
+      }
+    },
+    {
+      "identity" : "jwt-kit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/vapor/jwt-kit.git",
+      "state" : {
+        "revision" : "87ce13a1df913ba4d51cf00606df7ef24d455571",
+        "version" : "4.7.0"
       }
     },
     {

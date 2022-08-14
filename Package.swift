@@ -12,12 +12,14 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/alchemy-swift/alchemy", branch: "main"),
+        .package(url: "https://github.com/kylebrowning/APNSwift.git", from: "4.0.0"),
     ],
     targets: [
         .target(
             name: "apns-notification-channel",
             dependencies: [
                 .product(name: "Alchemy", package: "alchemy"),
+                .product(name: "APNSwift", package: "APNSwift"),
             ]),
     ]
 )
