@@ -3,12 +3,12 @@
 import PackageDescription
 
 let package = Package(
-    name: "apns-notification-channel",
+    name: "apns-message-channel",
     platforms: [
         .macOS(.v12)
     ],
     products: [
-        .library(name: "apns-notification-channel", targets: ["apns-notification-channel"]),
+        .library(name: "APNSMessageChannel", targets: ["APNSMessageChannel"]),
     ],
     dependencies: [
         .package(url: "https://github.com/alchemy-swift/alchemy", branch: "main"),
@@ -16,7 +16,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "apns-notification-channel",
+            name: "APNSMessageChannel",
             dependencies: [
                 .product(name: "Alchemy", package: "alchemy"),
                 .product(name: "APNSwift", package: "APNSwift"),
