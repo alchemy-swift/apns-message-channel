@@ -17,6 +17,10 @@ extension APNSMessenger {
     public func send(title: String, body: String, to receiver: APNSReceiver) async throws {
         try await send(APNSMessage(title: title, body: body), to: receiver.apnsDevice)
     }
+
+    public func send(title: String, body: String, to device: APNSDevice) async throws {
+        try await send(APNSMessage(title: title, body: body), to: device)
+    }
 }
 
 // MARK: Config + APNS

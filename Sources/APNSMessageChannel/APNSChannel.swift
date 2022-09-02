@@ -51,3 +51,5 @@ extension APNSReceiver {
         try await sender.send(APNSMessage(title: title, body: body), to: apnsDevice)
     }
 }
+
+extension APNSDevice: APNSReceiver {}
