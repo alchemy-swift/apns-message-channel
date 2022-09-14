@@ -39,11 +39,9 @@ private struct APNSwiftProvider: ChannelProvider {
         self.pool = EventLoopGroupConnectionPool<APNSConnectionSource>(source: source, logger: Log.logger, on: Loop.group)
     }
     
-    func send(message: APNSMessage, to device: APNSDevice) async throws {
+    func send(message: APNSwiftPayload, to device: APNSDevice) async throws {
         return try await pool.withConnection { connection in
-            let alert = APNSwiftAlert(title: message.title, body: message.body)
-            let payload = APNSwiftPayload(alert: alert)
-            try await connection.send(payload, pushType: .alert, to: device.deviceToken).get()
+            try await connection.send(message, pushType: .alert, to: device.deviceToken).get()
         }
     }
 }

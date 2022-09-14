@@ -1,4 +1,5 @@
 import Alchemy
+import APNSwift
 
 // MARK: Aliases
 
@@ -10,16 +11,20 @@ public func APNS(_ id: APNSMessenger.Identifier) -> APNSMessenger { .id(id) }
 public typealias APNSMessenger = Messenger<APNSChannel>
 
 extension APNSMessenger {
-    public func send(_ message: APNSMessage, toDeviceToken token: String) async throws {
+    public func send(_ message: APNSwiftPayload, toDeviceToken token: String) async throws {
         try await send(message, to: APNSDevice(deviceToken: token))
     }
     
     public func send(title: String, body: String, to receiver: APNSReceiver) async throws {
-        try await send(APNSMessage(title: title, body: body), to: receiver.apnsDevice)
+        let alert = APNSwiftAlert(title: title, body: body)
+        let payload = APNSwiftPayload(alert: alert)
+        try await send(payload, to: receiver.apnsDevice)
     }
 
     public func send(title: String, body: String, to device: APNSDevice) async throws {
-        try await send(APNSMessage(title: title, body: body), to: device)
+        let alert = APNSwiftAlert(title: title, body: body)
+        let payload = APNSwiftPayload(alert: alert)
+        try await send(payload, to: device)
     }
 }
 

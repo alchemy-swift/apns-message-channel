@@ -1,24 +1,16 @@
 import Alchemy
+import APNSwift
 
 // MARK: APNSChannel
 
 public struct APNSChannel: Channel {
-    public typealias Message = APNSMessage
+    public typealias Message = APNSwiftPayload
     public typealias Receiver = APNSDevice
 }
 
-public struct APNSMessage: Codable {
-    public let title: String
-    public let body: String
-    
+extension APNSwiftPayload {
     public func send<R: APNSReceiver>(to receiver: R, via sender: APNSMessenger = .default) async throws {
         try await sender.send(self, to: receiver.apnsDevice)
-    }
-}
-
-extension APNSMessage: ExpressibleByStringLiteral {
-    public init(stringLiteral value: String) {
-        self.init(title: "Alert", body: value)
     }
 }
 
@@ -43,12 +35,13 @@ extension APNSReceiver {
         APNSDevice(deviceToken: deviceToken)
     }
     
-    public func send(push: APNSMessage, via sender: APNSMessenger = .default) async throws {
+    public func send(push: APNSwiftPayload, via sender: APNSMessenger = .default) async throws {
         try await sender.send(push, to: apnsDevice)
     }
     
     public func send(push title: String, body: String, via sender: APNSMessenger = .default) async throws {
-        try await sender.send(APNSMessage(title: title, body: body), to: apnsDevice)
+        let alert = APNSwiftAlert(title: title, body: body)
+        try await sender.send(APNSwiftPayload(alert: alert), to: apnsDevice)
     }
 }
 
