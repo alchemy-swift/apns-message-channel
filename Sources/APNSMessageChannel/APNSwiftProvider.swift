@@ -44,6 +44,10 @@ private struct APNSwiftProvider: ChannelProvider {
             try await connection.send(message, pushType: .alert, to: device.deviceToken).get()
         }
     }
+
+    func shutdown() throws {
+        try pool.syncShutdownGracefully()
+    }
 }
 
 private struct APNSConnectionSource: ConnectionPoolSource {
